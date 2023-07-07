@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import optimalGameFn from "../optimalGameFn";
 
 export default function Game() {
 	const [total, setTotal] = useState(25);
@@ -44,13 +45,9 @@ export default function Game() {
 			return;
 		}
 
-		if (total <= 3) {
-			randomNum = Math.ceil(Math.random() * total);
-		} else {
-			randomNum = Math.ceil(Math.random() * 3);
-		}
+		optimalGameFn(total, AITotal);
 
-		setAITotal((prev) => prev + randomNum);
+		setAITotal((prev) => prev + AIMove);
 		setTotal((prev) => prev - inputTotal.valueAsNumber - randomNum);
 	}
 

@@ -20,4 +20,4 @@ function testGame(boxTotal) {
 	}
 }
 
-testGame(8);
+testGame(7);
