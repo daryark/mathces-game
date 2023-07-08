@@ -1,14 +1,21 @@
-export default function optimalGameFn(total: number, AITotal: number): number | string {
-	if (total > 8) {
-		const turn: number = Math.ceil(Math.random() * 3);
-
-		total - turn - 1 === 1;
+export default function optimalGameFn(total: number, AITotal: number): number | undefined {
+	if (total > 14) {
+		return Math.ceil(Math.random() * 3);
 	} else {
 		switch (total) {
-			case 13 || 14:
+			case 14:
 				return AITotal % 2 === 0 ? 2 : 3;
 
-			case 10 || 11 || 12:
+			case 13:
+				return AITotal % 2 === 0 ? 2 : 3;
+
+			case 12:
+				return AITotal % 2 === 0 ? 2 : 1;
+
+			case 11:
+				return AITotal % 2 === 0 ? 2 : 1;
+
+			case 10:
 				return AITotal % 2 === 0 ? 2 : 1;
 
 			case 9:
@@ -35,11 +42,12 @@ export default function optimalGameFn(total: number, AITotal: number): number | 
 			case 2:
 				return AITotal % 2 === 0 ? 2 : 1;
 
-			case 1 || 5 || 9:
+			case 1:
 				return 1;
 		}
 
-		return "Not acceptable parameters";
+		console.log(total);
+		return;
 	}
 }
 

@@ -42,10 +42,9 @@ export default function Game() {
 		setMyTotal((prev) => prev + inputTotal.valueAsNumber);
 		setTotal((prev) => prev - inputTotal.valueAsNumber);
 
-		const AIMove: number | string = optimalGameFn(total - inputTotal.valueAsNumber, AITotal);
+		const AIMove: number | undefined = optimalGameFn(total - inputTotal.valueAsNumber, AITotal);
 
-		if (typeof AIMove === "string") {
-			console.error(AIMove);
+		if (typeof AIMove === "undefined") {
 			return;
 		}
 
