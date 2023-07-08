@@ -1,10 +1,21 @@
-export default function optimalGameFn(total: number, AITotal: number): number | Error {
+export default function optimalGameFn(total: number, AITotal: number): number | string {
 	if (total > 8) {
-		return Math.ceil(Math.random() * 3);
+		const turn: number = Math.ceil(Math.random() * 3);
+
+		total - turn - 1 === 1;
 	} else {
 		switch (total) {
+			case 13 || 14:
+				return AITotal % 2 === 0 ? 2 : 3;
+
+			case 10 || 11 || 12:
+				return AITotal % 2 === 0 ? 2 : 1;
+
+			case 9:
+				return 1;
+
 			case 8:
-				return AITotal % 2 === 0 ? 3 : 1; //need fixes to avoid this num, if your total is //!odd
+				return AITotal % 2 === 0 ? 3 : 1;
 
 			case 7:
 				return AITotal % 2 === 0 ? 3 : 2;
@@ -24,11 +35,11 @@ export default function optimalGameFn(total: number, AITotal: number): number | 
 			case 2:
 				return AITotal % 2 === 0 ? 2 : 1;
 
-			case 1:
+			case 1 || 5 || 9:
 				return 1;
 		}
 
-		throw new Error("Not acceptable parameters");
+		return "Not acceptable parameters";
 	}
 }
 
@@ -36,5 +47,3 @@ export default function optimalGameFn(total: number, AITotal: number): number | 
 //the percent of probability to predict better move is so insignificant, so It's not rational to spent resource to calculate the moves.
 
 //On the contrary, it's totally possible to force game to win anyway starting from 8.
-
-////(better to get it with even sum before the move), or 10(in case of your even sum, you'll force to start with 8 in box, and your opponent will have odd at the time, which is less optimal situation)

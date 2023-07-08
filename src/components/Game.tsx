@@ -6,6 +6,7 @@ export default function Game() {
 	const [myTotal, setMyTotal] = useState(0);
 	const [AITotal, setAITotal] = useState(0);
 
+	//change color of winner result
 	useEffect(() => {
 		const button = document.getElementById("confirm-btn") as HTMLButtonElement;
 		const AIDivTotal = document.getElementById("ai-total") as HTMLDivElement;
@@ -32,23 +33,24 @@ export default function Game() {
 
 	function chooseMatchesAmount(): void {
 		const inputTotal = document.getElementById("matches") as HTMLInputElement;
+
 		if (total - inputTotal.valueAsNumber < 0) {
 			alert(`You can't take more matches then ${total}`);
 			return;
 		}
-		// setTotal((prev) => prev - inputTotal.valueAsNumber);
-		setMyTotal((prev) => prev + inputTotal.valueAsNumber);
 
-		let randomNum: number;
-		if (total - inputTotal.valueAsNumber < 1) {
-			setTotal((prev) => prev - inputTotal.valueAsNumber);
+		setMyTotal((prev) => prev + inputTotal.valueAsNumber);
+		setTotal((prev) => prev - inputTotal.valueAsNumber);
+
+		const AIMove: number | string = optimalGameFn(total - inputTotal.valueAsNumber, AITotal);
+
+		if (typeof AIMove === "string") {
+			console.error(AIMove);
 			return;
 		}
 
-		optimalGameFn(total, AITotal);
-
 		setAITotal((prev) => prev + AIMove);
-		setTotal((prev) => prev - inputTotal.valueAsNumber - randomNum);
+		setTotal((prev) => prev - AIMove);
 	}
 
 	const maxInputValue = total > 2 ? 3 : total;
